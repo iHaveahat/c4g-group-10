@@ -1,7 +1,5 @@
 # C4G Project
 
-This repository contains the source code for the **C4G** project. Follow the instructions below to set up the development environment.
-
 ## Prerequisites
 
 - **Node.js**: Make sure you have [Node.js](https://nodejs.org/) installed (preferably the latest LTS version).
