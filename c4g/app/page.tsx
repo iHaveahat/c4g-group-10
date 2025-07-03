@@ -33,10 +33,10 @@ export default function Home() {
         setResult(data.result);
         setConfidence(data.confidence);
       } else {
-        setResult(data.message || "❌ Error from backend.");
+        setResult(data.message || "Error from backend.");
       }
     } catch (err) {
-      setResult("❌ Could not connect to backend.");
+      setResult("Could not connect to backend.");
     } finally {
       setLoading(false);
     }
