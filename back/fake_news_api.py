@@ -131,4 +131,4 @@ if __name__ == '__main__':
     print("Flask app will run on http://127.0.0.1:5000/")
     print("Access http://127.0.0.1:5000/ in your browser to test the Flask-only frontend.")
     print("Your Next.js app will connect to this API on port 5000.")
-    app.run(debug=True, port=5000)
+    app.run(debug=True, port=5050)
