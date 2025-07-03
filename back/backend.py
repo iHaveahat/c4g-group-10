@@ -1,7 +1,7 @@
 from back.deberta_loader import predict_deberta, model
 from predictor import predict_text
 
-modelUse = "tfidf"
+modelUse = "tfif"
 def predict_fake_news_with_confidence(text: str) -> dict:
     """
     Routes prediction to the model.
