@@ -5,7 +5,7 @@
 from flask import Flask, request, jsonify, render_template
 import sys
 import os
-
+sys.path.append(os.path.dirname(__file__))
 
 try:
     import backend # This imports your team's TF-IDF backend
@@ -101,7 +101,7 @@ def predict():
 
     print(f"API received input: {news_input[:100]}...") # Log input for debugging
 
-    # Step 1: Get text content using Ishrak's robust scraper
+    # Step 1: Get text content using robust scraper
     content_for_prediction = get_text_content(news_input)
 
     if not content_for_prediction or not content_for_prediction.strip():
@@ -116,10 +116,12 @@ def predict():
 
     # Return the results as JSON
     return jsonify(prediction_result_from_team_backend)
+from back.deberta_loader import predict_deberta
+
+
 
 # --- Simple HTML Test Page for Flask API (Optional, for direct Flask testing) ---
-# This serves your original index.html but connects to the /predict API.
-# Save your `index.html` file in a subfolder named `templates` next to this `fake_news_api.py`.
+
 @app.route('/')
 def home():
     return render_template('index.html')
