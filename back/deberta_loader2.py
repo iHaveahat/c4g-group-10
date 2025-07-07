@@ -7,9 +7,9 @@ model_path = os.path.join(model_dir, "best_model.pt")
 
 # Load tokenizer normally
 tokenizer = AutoTokenizer.from_pretrained(model_dir)
-
+hub_model_id = "glurgle/quantized_deberta_model"
 # Load TorchScript quantized model
-model = torch.jit.load(model_path)
+model = torch.jit.load(hub_model_id)
 model.eval()
 
 device = torch.device("cuda" if torch.cuda.is_available() else "cpu")
