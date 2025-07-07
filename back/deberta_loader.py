@@ -2,9 +2,9 @@ import torch
 from transformers import AutoTokenizer, AutoModelForSequenceClassification
 import os
 model_path = os.path.join(os.path.dirname(__file__), "deberta_fake_news_model")
-
-tokenizer = AutoTokenizer.from_pretrained(model_path)
-model = AutoModelForSequenceClassification.from_pretrained(model_path).eval()
+hub_model_id = "glurgle/deberta_fake_news_model"
+tokenizer = AutoTokenizer.from_pretrained(hub_model_id)
+model = AutoModelForSequenceClassification.from_pretrained(hub_model_id).eval()
 device = torch.device("cuda" if torch.cuda.is_available() else "cpu")
 model.to(device)
 
