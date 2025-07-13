@@ -1,0 +1,65 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Misinformation Tracker</title>
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      text-align: center;
+      background: #f9f9f9;
+      padding: 50px;
+    }
+    h1 {
+      color: #333;
+    }
+    textarea {
+      width: 60%;
+      height: 200px;
+      padding: 10px;
+      font-size: 16px;
+      resize: vertical;
+      overflow-y: auto;
+      font-family: inherit;
+    }
+    button {
+      margin-top: 20px;
+      padding: 10px 20px;
+      font-size: 16px;
+      cursor: pointer;
+    }
+    #result {
+      margin-top: 30px;
+      font-size: 18px;
+      color: #555;
+    }
+  </style>
+</head>
+<body>
+  <h1>Misinformation Tracker</h1>
+  <textarea id="query" placeholder="Paste an article or claim to check for misinformation"></textarea><br />
+  <button onclick="checkMisinformation()">Enter</button>
+  <div id="result"></div>
+
+  <div style="margin-top: 40px;"></div>
+  <p>Developed by: Joshua, Ishrak, Swarali</p>
+  <p>Guided by: Nathan</p>
+
+  <script>
+    function checkMisinformation() {
+      const query = document.getElementById('query').value.trim();
+      const resultDiv = document.getElementById('result');
+
+      // Simulated AI response — replace with your actual model/API
+      if (!query) {
+        resultDiv.textContent = "Please enter content to evaluate.";
+      } else if (query.toLowerCase().includes("flat earth")) {
+        resultDiv.textContent = "❌ This is classified as misinformation.";
+      } else {
+        resultDiv.textContent = "✅ This claim appears to be reliable.";
+      }
+    }
+  </script>
+</body>
+</html>
