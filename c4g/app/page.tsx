@@ -75,7 +75,7 @@ export default function Home() {
             }}
     >
       {/* H1 */}
-      <h1 className="text-3xl font-bold mb-6 text-gray-800">Misinformation Tracker</h1> {/* text-gray-800 approximates #333 */}
+      <h1 className="text-3xl font-bold mb-6 text-black">Misinformation Tracker</h1> {/* text-gray-800 approximates #333 */}
 
       <form onSubmit={handleSubmit} className="space-y-4">
         <textarea
@@ -96,7 +96,7 @@ export default function Home() {
       </form>
 
       {/* Result/Message Display Area */}
-      <div id="result-display" className="mt-8 text-lg text-gray-700"> {/* Adjusted margin-top*/}
+      <div id="result-display" className="mt-8 text-lg text-black"> {/* Adjusted margin-top*/}
         {/* Loading/Error/Initial messages */}
         {displayMessage && (
             <p className={`${loading ? 'text-gray-600' : 'text-yellow-600'}`}> {/* Gray for loading, yellow for warnings */}
@@ -110,7 +110,7 @@ export default function Home() {
                style={{ 
                    backgroundColor: result.includes('✅') ? '#e6ffe6' : (result.includes('❌') ? '#ffe6e6' : '#fff'), // Light green/red/white background based on result
                    color: result.includes('✅') ? '#28a745' : (result.includes('❌') ? '#dc3545' : '#555'), // Dark green/red/default text color
-                   fontSize: '18px', // From teammate's style
+                   fontSize: '18px',
                    textAlign: 'center' // Ensure text aligns center
                }}
           >
