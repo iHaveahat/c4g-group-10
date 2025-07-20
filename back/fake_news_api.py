@@ -116,7 +116,7 @@ def predict():
 
     # Return the results as JSON
     return jsonify(prediction_result_from_team_backend)
-from back.deberta_loader import predict_deberta
+from deberta_loader import predict_deberta
 
 
 
