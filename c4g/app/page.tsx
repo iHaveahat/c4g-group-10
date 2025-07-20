@@ -8,10 +8,11 @@ export default function Home() {
   const [loading, setLoading] = useState(false);
   const [displayMessage, setDisplayMessage] = useState<string | null>(null);
 
-  const handleSubmit = async (e: React.FormEvent) => {
-    e.preventDefault();
+  const handleSubmit = async () => {
     if (!input.trim()) {
-      setDisplayMessage("Please paste an article or claim to check for misinformation.");
+      setDisplayMessage(
+        "Please paste an article or claim to check for misinformation."
+      );
       setResult("");
       setConfidence(null);
       return;
@@ -20,7 +21,6 @@ export default function Home() {
     setLoading(true);
     setResult("");
     setConfidence(null);
-
 
     try {
       const res = await fetch("http://localhost:5050/predict", {
@@ -41,17 +41,27 @@ export default function Home() {
           setResult("❌ This is classified as misinformation.");
           setConfidence(data.confidence);
         } else {
-          setDisplayMessage(`⚠️ Unexpected API response: ${data.result || JSON.stringify(data)}`);
+          setDisplayMessage(
+            `⚠️ Unexpected API response: ${data.result || JSON.stringify(data)}`
+          );
           setResult("");
           setConfidence(null);
         }
       } else {
-        setDisplayMessage(`⚠️ API Error: ${data.message || data.error || "An unknown error occurred from the backend."}`);
+        setDisplayMessage(
+          `⚠️ API Error: ${
+            data.message ||
+            data.error ||
+            "An unknown error occurred from the backend."
+          }`
+        );
         setResult("");
         setConfidence(null);
       }
     } catch (err) {
-      setDisplayMessage("🚫 Could not connect to the backend. Please ensure the server is running.");
+      setDisplayMessage(
+        "🚫 Could not connect to the backend. Please ensure the server is running."
+      );
       setResult("");
       setConfidence(null);
       console.error("API connection error:", err);
@@ -61,133 +71,76 @@ export default function Home() {
   };
 
   return (
-    <main
-      className="min-h-screen flex flex-col items-center justify-start"
-      style={{
-        fontFamily: "Arial, sans-serif",
-        background: "#f9f9f9",
-        padding: "50px",
-        textAlign: "center",
-      }}
-    >
-      <h1 style={{ color: "#333", fontSize: "2rem", marginBottom: "1.5rem" }}>
+    <main className="min-h-screen flex flex-col items-center justify-start bg-gray-50 px-12 py-12 text-center">
+      <h1 className="text-gray-800 text-3xl mb-6 font-sans">
         Misinformation Tracker
       </h1>
 
-      <form onSubmit={handleSubmit} style={{ width: "100%", maxWidth: "700px" }}>
+      <div className="w-full max-w-2xl">
         <textarea
           value={input}
           onChange={(e) => setInput(e.target.value)}
           placeholder="Paste an article or claim to check for misinformation"
-          style={{
-            width: "100%",
-            height: "200px",
-            padding: "10px",
-            fontSize: "16px",
-            resize: "vertical",
-            overflowY: "auto",
-            fontFamily: "inherit",
-            border: "1px solid #ccc",
-            borderRadius: "6px",
-          }}
+          className="w-full h-48 p-3 text-base text-black placeholder-gray-500 resize-y overflow-y-auto font-sans border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500"
         />
-        <br />
         <button
-          type="submit"
+          onClick={handleSubmit}
           disabled={loading}
-          style={{
-            marginTop: "20px",
-            padding: "10px 20px",
-            fontSize: "16px",
-            cursor: "pointer",
-            backgroundColor: "#007bff",
-            color: "#fff",
-            border: "none",
-            borderRadius: "4px",
-            transition: "background 0.2s",
-            display: "inline-flex",
-            alignItems: "center",
-            justifyContent: "center",
-          }}
-          onMouseOver={(e) => (e.currentTarget.style.backgroundColor = "#0056b3")}
-          onMouseOut={(e) => (e.currentTarget.style.backgroundColor = "#007bff")}
+          className="mt-5 px-5 py-2.5 text-base cursor-pointer bg-blue-600 text-white border-none rounded inline-flex items-center justify-center transition-colors duration-200 hover:bg-blue-700 disabled:cursor-not-allowed"
         >
           {loading ? (
             <span className="flex items-center gap-1">
               Classifying
-              <span className="dot bounce1">●</span>
-              <span className="dot bounce2">●</span>
-              <span className="dot bounce3">●</span>
+              <span className="text-xl leading-none animate-bounce delay-0">
+                ●
+              </span>
+              <span className="text-xl leading-none animate-bounce delay-200">
+                ●
+              </span>
+              <span className="text-xl leading-none animate-bounce delay-400">
+                ●
+              </span>
             </span>
           ) : (
             "Enter"
           )}
         </button>
-      </form>
+      </div>
 
-      <div id="result" style={{ marginTop: "30px", fontSize: "18px", color: "#555" }}>
+      <div className="mt-8 text-lg text-gray-600">
         {displayMessage && <p>{displayMessage}</p>}
         {result && (
           <div
-            style={{
-              marginTop: "10px",
-              backgroundColor: result.includes("✅")
-                ? "#e6ffe6"
+            className={`mt-2.5 p-4 rounded-lg text-lg font-medium ${
+              result.includes("✅")
+                ? "bg-green-50 text-green-600"
                 : result.includes("❌")
-                ? "#ffe6e6"
-                : "#fff",
-              color: result.includes("✅")
-                ? "#28a745"
-                : result.includes("❌")
-                ? "#dc3545"
-                : "#555",
-              padding: "15px",
-              borderRadius: "8px",
-              fontSize: "18px",
-              fontWeight: "500",
-            }}
+                ? "bg-red-50 text-red-600"
+                : "bg-white text-gray-600"
+            }`}
           >
             <p>{result}</p>
             {confidence !== null && (
-              <p style={{ color: "#666", marginTop: "8px" }}>
-                Confidence: {confidence}%
-              </p>
+              <p className="text-gray-500 mt-2">Confidence: {confidence}%</p>
             )}
           </div>
         )}
       </div>
 
-      <div style={{ marginTop: "40px", color: "#666", fontSize: "16px" }}>
+      <div className="mt-10 text-gray-500 text-base">
         <p>Developed by: Joshua, Ishrak, Swarali</p>
         <p>Guided by: Nathan</p>
       </div>
 
-      {/* Animated Dots CSS */}
       <style jsx>{`
-        .dot {
-          font-size: 20px;
-          line-height: 0;
-          animation: bounce 1.4s infinite ease-in-out;
-        }
-        .bounce1 {
+        .delay-0 {
           animation-delay: 0s;
         }
-        .bounce2 {
+        .delay-200 {
           animation-delay: 0.2s;
         }
-        .bounce3 {
+        .delay-400 {
           animation-delay: 0.4s;
-        }
-
-        @keyframes bounce {
-          0%, 80%, 100% {
-            transform: scale(0);
-            opacity: 0.4;
-          }
-          40% {
-            transform: scale(1);
-            opacity: 1;
-          }
         }
       `}</style>
     </main>
