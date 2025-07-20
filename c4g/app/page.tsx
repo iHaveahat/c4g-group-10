@@ -73,7 +73,7 @@ export default function Home() {
   return (
     <main className="min-h-screen flex flex-col items-center justify-start bg-gray-50 px-12 py-12 text-center">
       <h1 className="text-gray-800 text-3xl mb-6 font-sans">
-        Misinformation Tracker
+        Misinformation Checker
       </h1>
 
       <div className="w-full max-w-2xl">
